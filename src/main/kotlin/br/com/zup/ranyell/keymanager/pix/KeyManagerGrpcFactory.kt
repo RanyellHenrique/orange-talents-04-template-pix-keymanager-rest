@@ -1,6 +1,7 @@
 package br.com.zup.ranyell.keymanager.pix
 
 import br.com.zup.ranyell.keymanager.KeyManagerConsultaGrpcServiceGrpc
+import br.com.zup.ranyell.keymanager.KeyManagerListaChavePixPorClienteGrpcServiceGrpc
 import br.com.zup.ranyell.keymanager.KeyManagerRegistraGrpcServiceGrpc
 import br.com.zup.ranyell.keymanager.KeyManagerRemoveGrpcServiceGrpc
 import io.grpc.ManagedChannel
@@ -19,4 +20,7 @@ class KeyManagerGrpcFactory(@GrpcChannel("keymanager") val channel: ManagedChann
 
     @Singleton
     fun consultaChave() = KeyManagerConsultaGrpcServiceGrpc.newBlockingStub(channel)
+
+    @Singleton
+    fun listaChaves() = KeyManagerListaChavePixPorClienteGrpcServiceGrpc.newBlockingStub(channel)
 }
