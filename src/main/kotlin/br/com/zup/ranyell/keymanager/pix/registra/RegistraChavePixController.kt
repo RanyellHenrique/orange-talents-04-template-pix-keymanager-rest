@@ -2,7 +2,6 @@ package br.com.zup.ranyell.keymanager.pix.registra
 
 import br.com.zup.ranyell.keymanager.KeyManagerRegistraGrpcServiceGrpc
 import br.com.zup.ranyell.keymanager.compartilhado.validacao.UUIDValid
-import br.com.zup.ranyell.keymanager.pix.KeyManagerGrpcFactory
 import io.micronaut.http.HttpResponse
 import io.micronaut.http.annotation.Body
 import io.micronaut.http.annotation.Controller

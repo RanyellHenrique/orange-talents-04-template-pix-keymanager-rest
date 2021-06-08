@@ -3,14 +3,15 @@ package br.com.zup.ranyell.keymanager.pix.lista
 import br.com.zup.ranyell.keymanager.ChavePixResponse
 import java.time.LocalDateTime
 import java.time.ZoneOffset
-import java.time.format.DateTimeFormatter
 
 data class ChavePixInfoCliente(
     val pixId: String,
     val clienteId: String,
     val chave: String,
-    val tipo: String,
-    val registradaEm: String
+    val tipoDeConta: String,
+    val tipoDeChave: String,
+    val registradaEm: LocalDateTime
+
 ) {
 
     companion object {
@@ -19,10 +20,14 @@ data class ChavePixInfoCliente(
                 pixId = chave.pixId,
                 clienteId = chave.clienteId,
                 chave = chave.chave,
-                tipo = chave.tipoDeChave.name,
+                tipoDeConta = chave.tipoDeConta.name,
+                tipoDeChave = chave.tipoDeChave.name,
                 registradaEm = chave.registradaEm.let {
-                    LocalDateTime.ofEpochSecond(it.seconds, it.nanos, ZoneOffset.UTC)
-                        .format(DateTimeFormatter.ISO_DATE_TIME)
+                    LocalDateTime.ofEpochSecond(
+                        it.seconds,
+                        it.nanos,
+                        ZoneOffset.UTC
+                    )
                 }
             )
         }

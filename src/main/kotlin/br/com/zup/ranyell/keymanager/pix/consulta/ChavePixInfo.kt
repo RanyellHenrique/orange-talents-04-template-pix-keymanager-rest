@@ -13,7 +13,7 @@ data class ChavePixInfo(
     val titularCpf: String,
     val tipo: String,
     val conta: ContaAssociada,
-    val registradaEm: String
+    val registradaEm: LocalDateTime
 ) {
 
     companion object {
@@ -27,7 +27,6 @@ data class ChavePixInfo(
                 tipo = chave.tipoDeChave.name,
                 registradaEm = chave.registradaEm.let {
                     LocalDateTime.ofEpochSecond(it.seconds, it.nanos, ZoneOffset.UTC)
-                        .format(DateTimeFormatter.ISO_DATE_TIME)
                 },
                 conta = ContaAssociada(
                     nome = chave.conta.nome,
