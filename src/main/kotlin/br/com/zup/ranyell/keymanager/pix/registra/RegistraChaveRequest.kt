@@ -1,7 +1,6 @@
 package br.com.zup.ranyell.keymanager.pix.registra
 
 import br.com.zup.ranyell.keymanager.RegistraChavePixRequest
-import br.com.zup.ranyell.keymanager.compartilhado.validacao.UUIDValid
 import br.com.zup.ranyell.keymanager.compartilhado.validacao.ValidPixKey
 import br.com.zup.ranyell.keymanager.pix.TipoDeConta
 import io.micronaut.core.annotation.Introspected

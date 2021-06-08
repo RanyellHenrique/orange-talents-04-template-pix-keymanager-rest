@@ -1,7 +1,8 @@
 package br.com.zup.ranyell.keymanager.pix.registra
 
+import br.com.zup.ranyell.keymanager.KeyManagerRegistraGrpcServiceGrpc
 import br.com.zup.ranyell.keymanager.compartilhado.validacao.UUIDValid
-import br.com.zup.ranyell.keymanager.pix.GrpcClientFactory
+import br.com.zup.ranyell.keymanager.pix.KeyManagerGrpcFactory
 import io.micronaut.http.HttpResponse
 import io.micronaut.http.annotation.Body
 import io.micronaut.http.annotation.Controller
@@ -16,7 +17,7 @@ import javax.validation.constraints.NotBlank
 @Controller("/api/v1/clientes/")
 @Validated
 class RegistraChavePixController(
-    @Inject private val grpcClient: GrpcClientFactory
+    @Inject private val grpcClient: KeyManagerRegistraGrpcServiceGrpc.KeyManagerRegistraGrpcServiceBlockingStub
 ) {
     private val LOOGER = LoggerFactory.getLogger(this::class.java)
 
@@ -25,10 +26,10 @@ class RegistraChavePixController(
         @Valid @Body request: RegistraChaveRequest,
         @UUIDValid @NotBlank @PathVariable clienteId: String
     ): HttpResponse<Any>? {
-        return grpcClient.registraChave().registra(request.toGrpcRequest(clienteId))
+        return grpcClient.registra(request.toGrpcRequest(clienteId))
             .also { LOOGER.info("Nova chave pix do cliente de id = $clienteId cadastrada com sucesso") }
             .let { HttpResponse.created(location(it.clienteId, it.pixId)) }
     }
 
-    fun location(clienteId: String, pixId: String) = HttpResponse.uri("/api/v1/clientes/${clienteId}/pix/${pixId}")
+    private fun location(clienteId: String, pixId: String) = HttpResponse.uri("/api/v1/clientes/${clienteId}/pix/${pixId}")
 }
