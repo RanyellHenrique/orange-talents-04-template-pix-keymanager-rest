@@ -49,11 +49,12 @@ internal class RegistraChavePixControllerTest {
     @Test
     internal fun `nao deve registrar uma nova chave quando houver argumentos invalidos`() {
         //cenário
+        `when`(grpcClient.registra(any())).thenReturn(registraChavePixResponseGrpc())
         val novaChave = RegistraChaveRequest(TipoDeChaveModel.EMAIL,"chave invalida" , TipoDeContaModel.CONTA_POUPANCA)
         val request = HttpRequest.POST("/api/v1/clientes/ae93a61c-0642-43b3-bb8e-a17072295958/pix", novaChave)
         //ação
         val response  = assertThrows<HttpClientResponseException> {
-            client.toBlocking().exchange(request, RegistraChaveRequest::class.java)
+            client.toBlocking().exchange(request, Any::class.java)
         }
         //validacão
         with(response) {
