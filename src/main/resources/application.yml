@@ -8,7 +8,7 @@ grpc:
     max-retry-attempts: 10
   channels:
     keymanager:
-      address: 'localhost:50051'
+      address: ${ADDRESS_KEYMANAGER:localhost:50051}
       plaintext: true
       max-retry-attempts: 5
 
